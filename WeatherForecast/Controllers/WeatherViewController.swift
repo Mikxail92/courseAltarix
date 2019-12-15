@@ -1,10 +1,4 @@
-//
-//  ViewControllerWeather.swift
-//  WeatherForecast
-//
-//  Created by 123 on 10.12.19.
-//  Copyright © 2019 Zateev. All rights reserved.
-//
+
 
 import UIKit
 
@@ -13,13 +7,11 @@ class WeatherViewController: UIViewController {
     var weatherOneDay: WeatherForecastModel!
     var weatherFiveDay: WeatherFiveDayModel!
     
-    
     @IBOutlet weak var viewOneDay: UIView!
     @IBOutlet weak var viewFiveDay: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var segment: UISegmentedControl!
-    
     
     @IBOutlet weak var weatherIconImage: UIImageView!
     @IBOutlet weak var pressureLabel: UILabel!
@@ -45,9 +37,9 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         appropriationLable()
     }
-    private func appropriationLable(){
-        self.title = weatherOneDay.name + " " +  weatherOneDay.sys.country
-        
+    
+    private func appropriationLable() {
+        title = weatherOneDay.name + " " +  weatherOneDay.sys.country
         pressureLabel.text = weatherOneDay.main.pressureString
         tempLabel.text = weatherOneDay.main.tempString
         humidityLabel.text = weatherOneDay.main.humidityString
@@ -57,7 +49,7 @@ class WeatherViewController: UIViewController {
     }
 }
 
-extension WeatherViewController: UICollectionViewDataSource{
+extension WeatherViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return weatherFiveDay.list.count / 8 
@@ -65,7 +57,7 @@ extension WeatherViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellCollection", for: indexPath) as! CollectionViewCell
-        cell.configuration(weatherFiveDay: self.weatherFiveDay, indexPath: indexPath)
+        cell.configuration(weatherFiveDay: weatherFiveDay, indexPath: indexPath)
         return cell
     }
     

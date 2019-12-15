@@ -1,10 +1,4 @@
-//
-//  WeatherModel.swift
-//  WeatherForecast
-//
-//  Created by 123 on 10.12.19.
-//  Copyright © 2019 Zateev. All rights reserved.
-//
+
 
 import Foundation
 
@@ -44,6 +38,7 @@ struct MainWeatherModel: Codable {
         return "Влажность  \(humidity)  %"
     }
 }
+
 struct WindWeatherModel: Codable {
     let speed: Double
     var speedString: String {
@@ -51,26 +46,8 @@ struct WindWeatherModel: Codable {
     }
 }
 
-// модель на 5 дней
 
-struct WeatherFiveDayModel: Codable {
-    let city: CityWeatherModel
-    let list: [ListWeatherModel]
-}
 
-struct CityWeatherModel: Codable{
-    let name: String
-}
-
-struct ListWeatherModel:Codable{
-    let main: MainWeatherModel
-    let weather: [WeatherModel]
-    let dt_txt: String
-    
-    var dateWeatherString: String {
-        return dt_txt
-    }
-}
 
 
 

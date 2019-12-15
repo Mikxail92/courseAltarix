@@ -123,8 +123,8 @@
                                                 <color key="backgroundColor" red="0.73497154490000005" green="0.86688726729999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <outlet property="dateWeather" destination="tOO-23-oSx" id="TFm-Ta-wcJ"/>
-                                                    <outlet property="iweatherImage" destination="VHo-8Q-78g" id="CkS-Yx-zOA"/>
                                                     <outlet property="tempLabel" destination="b4v-AX-Zyd" id="ObC-BF-I7z"/>
+                                                    <outlet property="weatherFiveDayImage" destination="VHo-8Q-78g" id="CkS-Yx-zOA"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

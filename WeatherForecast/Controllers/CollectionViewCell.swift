@@ -1,10 +1,4 @@
-//
-//  CollectionViewCell.swift
-//  WeatherForecast
-//
-//  Created by 123 on 11.12.19.
-//  Copyright © 2019 Zateev. All rights reserved.
-//
+
 
 import UIKit
 
@@ -12,10 +6,9 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var dateWeather: UILabel!
-    @IBOutlet weak var iweatherImage: UIImageView!
+    @IBOutlet weak var weatherFiveDayImage: UIImageView!
     
-    func configuration(weatherFiveDay: WeatherFiveDayModel,indexPath: IndexPath){
-        
+    func configuration(weatherFiveDay: WeatherFiveDayModel,indexPath: IndexPath) {
         let weather  = weatherFiveDay.list
         
         var  tempMaxArray = [Double]()
@@ -27,16 +20,27 @@ class CollectionViewCell: UICollectionViewCell {
         var dateArray = [String]()
         var supportDateArray = [String]()
         
-        // создаю массив всех значегий temp мин и макс, дата
+        var imageInFiveDayArray = [String]()
+        var supportImageInFiveDayArray = [String]()
+        
+        // создаю массив всех значегий temp мин и макс, дата,картинка погоды
         
         for i in weather {
+          let rr =  i.weather[0].icon
+            
+            supportImageInFiveDayArray.append(rr)
             supportArray1.append(i.main.temp_max)
             supportArray2.append(i.main.temp_min)
             supportDateArray.append(i.dateWeatherString)
         }
+        
         var n = 0
         var m = 7
-        for i in stride(from: 7, to: weather.count  , by: 8){
+        for i in stride(from: 7, to: weather.count , by: 8) {
+            
+            let icon =  supportImageInFiveDayArray.remove(at: i-4)
+            
+            imageInFiveDayArray.append(icon)
             
             dateArray.append(supportDateArray[i])
             let k = supportArray2[n...m]
@@ -48,13 +52,12 @@ class CollectionViewCell: UICollectionViewCell {
             n = n + 8
             m = m + 8
         }
-        
         let averageTempMin = "\(Int(tempMinArray[indexPath.row]) - 273) C°"
         let averageTempMax = "\(Int(tempMaxArray[indexPath.row]) - 273) C°"
+        
         // расчет даты
-        
         let dateWeatherString = dateArray[indexPath.row]
-        
+      
         let dateFormatter = DateFormatter ()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss "
         let dateWeather = dateFormatter.date(from:dateWeatherString )
@@ -83,7 +86,7 @@ class CollectionViewCell: UICollectionViewCell {
         let monthString = "\( calendar.component(.month , from: dateWeather!))"
         
         self.dateWeather.text =  weekdayString  + " " + dayString + "." + monthString
-        
-        self.tempLabel.text = averageTempMin + " / " + averageTempMax
+        tempLabel.text = averageTempMin + " / " + averageTempMax
+        weatherFiveDayImage.image = UIImage(named: imageInFiveDayArray[indexPath.row])
     }
 }
