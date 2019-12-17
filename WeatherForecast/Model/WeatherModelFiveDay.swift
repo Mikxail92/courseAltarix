@@ -7,11 +7,11 @@ struct WeatherFiveDayModel: Codable {
     let list: [ListWeatherModel]
 }
 
-struct CityWeatherModel: Codable{
+struct CityWeatherModel: Codable {
     let name: String
 }
 
-struct ListWeatherModel:Codable{
+struct ListWeatherModel: Codable {
     let main: MainWeatherModel
     let weather: [WeatherModel]
     let dt_txt: String

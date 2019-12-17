@@ -39,13 +39,13 @@ class WeatherViewController: UIViewController {
     }
     
     private func appropriationLable() {
-        title = weatherOneDay.name + " " +  weatherOneDay.sys.country
+        title = weatherOneDay.name + " " + weatherOneDay.sys.country
         pressureLabel.text = weatherOneDay.main.pressureString
         tempLabel.text = weatherOneDay.main.tempString
         humidityLabel.text = weatherOneDay.main.humidityString
         speedWindLabel.text = weatherOneDay.wind.speedString
         let image = weatherOneDay.weather[0].icon
-        weatherIconImage.image = UIImage(named:image)
+        weatherIconImage.image = UIImage(named: image)
     }
 }
 

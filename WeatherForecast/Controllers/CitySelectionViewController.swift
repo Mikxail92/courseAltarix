@@ -7,12 +7,8 @@ class CitySelectionViewController: UIViewController {
     var weatherFiveDay: WeatherFiveDayModel!
     var weatherOneDay: WeatherForecastModel!
     
-    var urlCity = ""
-    
-    
     @IBOutlet weak var citySelectionLabel: UILabel!
     @IBOutlet weak var citySelectionTextField: UITextField!
-    
     
     @IBAction func confirmCiry(_ sender: UIButton) {
         downloadWeatherOneDay()
@@ -20,48 +16,39 @@ class CitySelectionViewController: UIViewController {
     }
     
     func downloadWeatherFiveDay() {
-        self.urlCity = citySelectionTextField.text!
-        let urlFull = UrlCountDay.urlFiveDay.rawValue + urlCity 
+        let urlCity = citySelectionTextField.text!
+        let urlFull = UrlCountDay.urlFiveDay.rawValue + urlCity
         Networking.fetchData(url: urlFull) {[unowned self]  (weatherFive: WeatherFiveDayModel?, error: Error? )  in
             self.weatherFiveDay = weatherFive
             if error != nil {
-                DispatchQueue.main.async {
-                    self.alertTextError()
-                }
-            }else {
+                self.alertTextError()
+            } else {
                 self.weatherFiveDay = weatherFive
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "segueWeather", sender: nil)
-                }
+                self.performSegue(withIdentifier: "segueWeather", sender: nil)
             }
-            
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard  let dvc = segue.destination as? WeatherViewController else {return}
-        dvc.weatherOneDay = self.weatherOneDay
-        dvc.weatherFiveDay = self.weatherFiveDay
+        dvc.weatherOneDay = weatherOneDay
+        dvc.weatherFiveDay = weatherFiveDay
     }
     
     func downloadWeatherOneDay() {
         if  citySelectionTextField.text != "" {
-            self.urlCity = citySelectionTextField.text!
-            let urlFull =  UrlCountDay.urlOneDay.rawValue + urlCity
-            
+            let urlCity = citySelectionTextField.text!
+            let urlFull = UrlCountDay.urlOneDay.rawValue  + urlCity
             Networking.fetchData(url: urlFull) {[unowned self] (weather: WeatherForecastModel?, error: Error?) in
                 if error != nil {
-                    DispatchQueue.main.async {
-                        self.alertTextError()
-                    }
-                }else {
+                    self.alertTextError()
+                } else {
                     if let weather = weather {
                         self.weatherOneDay = weather
                     }
                 }
             }
-            
-        }else {
+        } else {
             alertTextEmpti()
         }
     }
