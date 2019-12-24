@@ -1,22 +1,21 @@
+//
+//  WeatherFiveDayModel.swift
+//  WeatherForecast
+//
+//  Created by  Zateev on 18.12.2019.
+//  Copyright © 2019 Zateev. All rights reserved.
+//
 
+import  RealmSwift
 
-import Foundation
-
-struct WeatherFiveDayModel: Codable {
-    let city: CityWeatherModel
-    let list: [ListWeatherModel]
-}
-
-struct CityWeatherModel: Codable {
-    let name: String
-}
-
-struct ListWeatherModel: Codable {
-    let main: MainWeatherModel
-    let weather: [WeatherModel]
-    let dt_txt: String
+class WeatherFiveDayModel: Object, Codable {
     
-    var dateWeatherString: String {
-        return dt_txt
+    var list = List<ListWeatherModel>()
+    
+    @objc  dynamic  var id: String? = ""
+    @objc  dynamic var city: CityWeatherModel?
+    
+    public override static func primaryKey() -> String? {
+        return "id"
     }
 }

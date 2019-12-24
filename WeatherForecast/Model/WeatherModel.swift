@@ -6,4 +6,16 @@
 //  Copyright © 2019 Zateev. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
+
+class WeatherModel: Object, Codable {
+    @objc dynamic var main = ""
+    @objc dynamic var descriptionWeather: String
+    @objc dynamic var icon = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case main
+        case descriptionWeather = "description"
+        case icon
+    }
+}
